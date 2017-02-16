@@ -1,0 +1,16 @@
+<h1>Food Recipes</h1>
+
+<table>
+  <tr>
+    <th>Ingredients</th>
+    <th>Spices</th>
+    <th>Measurements</th>
+  </tr>
+  <% @foods.each do |food|%>
+    <tr>
+      <td><%= food["ingredient"]%></td> 
+      <td><%= food["spice"] %></td> 
+      <td><%= food["measurement"] %></td> 
+    </tr>
+  <% end %>
+</table>
