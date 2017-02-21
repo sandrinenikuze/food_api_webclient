@@ -1,14 +1,7 @@
 <h1>Food Recipe</h1>
-<table>
-  <tr>
-    <th>Ingredient</th>
-    <th>Spice</th>
-    <th>Measurement</th>
-  </tr>
-  <tr>
-    <td><%= @food["ingredient"] %></td>
-    <td><%= @food["spice"] %></td> 
-    <td><%= @food["measurement"] %></td>
-  </tr>
-</table>
-   
+<div>ID:<%=@food.id%></div>
+<div>Ingredient:<%= @food.ingredient %></div>
+<div>Spice: <%= @food.spice %></div>
+<div>Measurement: <%= @food.measurement%></div>
+
+<%= link_to "Delete recipe", "/foods/#{@food.id}", method: :delete %>

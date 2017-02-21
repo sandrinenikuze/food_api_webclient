@@ -1,0 +1,6 @@
+<%= form_tag "/foods/#{@food['id']}", method: :patch do %>
+  Ingredient: <input type="text" name="ingredient" value="<%=@food.ingredient%>">
+  Spice: <input type="text" name="spice" value="<%=@ food.spice %>">
+  Measurement: <input type="text" name="measurement" value="<%=@food.measurement%>">
+  <input type="submit" value="update">
+<%end%>
