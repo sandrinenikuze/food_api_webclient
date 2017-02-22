@@ -10,29 +10,30 @@ class Food
   end
 
   def self.find(id)
-    food_hash= Unirest.get("#{ENV['DOMAIN']}/foods/#{:id}.json").body
+    food_hash= Unirest.get("#{ENV['DOMAIN']}/foods/#{:id}.json",headers:{"Accept"=> "application/json", "Authorization"=> "Token token=#{ENV['API_KEY']}", "Y-Use-Email"=> ENV['Y_USER_EMAIL']}).body
     @food = Food.new(food_hash)
   end
   def self.all
-    food_hashes = Unirest.get("#{ENV['DOMAIN']}/foods.json").body
+    food_hashes = Unirest.get("#{ENV['DOMAIN']}/foods.json",headers:{"Accept"=> "application/json", "Authorization"=> "Token token=#{ENV['API_KEY']}", "Y-Use-Email"=> ENV['Y_USER_EMAIL']}).body
     @foods = []
     food_hashes.each do|food_hash|
      @foods << Food.new(food_hash)
    end 
-   @foods
+   return @foods
   end 
   def self.create
-    food_hash = Unirest.post("#{ENV['DOMAIN']}/foods.json", :headers =>{"Accept"=> "application/json"}, :parameters=>{:ingredient=> params[:ingredient], :spice=> params[:spice], :measurement=> params[:measurement]}).body
+    food_hash = Unirest.post("#{ENV['DOMAIN']}/foods.json", headers:{"Accept"=> "application/json", "Authorization"=> "Token token=#{ENV['API_KEY']}", "Y-Use-Email"=> ENV['Y_USER_EMAIL']}, :parameters=>{:ingredient=> params[:ingredient], :spice=> params[:spice], :measurement=> params[:measurement]}).body
   end
     
   def self. edit
     food_hash = Unirest.get("#{ENV['DOMAIN']}/foods/#{params[:id]}.json").body
   end 
-  def self. update
-   @food = Unirest.patch("#{ENV['DOMAIN']}/foods.json", :headers => {"Accept"=> "application/json"},:parameters=>{:ingredient=> params[:ingredient], :spice=> params[:spice], :measurement=> params[:measurement]}).body
+  def update
+   @food = Unirest.patch("#{ENV['DOMAIN']}/foods.json", headers:{"Accept"=> "application/json", "Authorization"=> "Token token=#{ENV['API_KEY']}", "Y-Use-Email"=> ENV['Y_USER_EMAIL']},:parameters=>{:ingredient=> params[:ingredient], :spice=> params[:spice], :measurement=> params[:measurement]}).body
   end 
   def delete
-    Unirest.delete("#{ENV['DOMAIN']}/foods/#{params[:id]}.json").body
+    @food = Unirest.delete("#{ENV['DOMAIN']}/foods/#{params[:id]}.json", headers:{"Accept"=> "application/json", "Authorization"=> "Token token=#{ENV['API_KEY']}", "Y-Use-Email"=> ENV['Y_USER_EMAIL']}).body
+
   end 
 end
     
